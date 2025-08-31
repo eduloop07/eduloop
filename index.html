@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduLoop - Revolutionizing Your Study (Coming Soon!)</title>
+    
+    <!-- SEO Meta Tags for Ranking on "EduLoop" Keyword -->
+    <meta name="description" content="EduLoop is revolutionizing study with AI-powered tools: instant summarization, quiz generation, topic explanations, and effortless note-taking. Coming soon – sign up for early access!" />
+    <meta name="keywords" content="EduLoop, study companion, AI study tools, summarizer, quiz generator, topic explainer, note-taking, educational AI, smart learning, coming soon" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://eduloop.vercel.app" /> <!-- Replace with your actual URL -->
+    
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://eduloop.vercel.app" /> <!-- Replace with your actual URL -->
+    <meta property="og:title" content="EduLoop - Revolutionizing Your Study (Coming Soon!)" />
+    <meta property="og:description" content="EduLoop is your ultimate AI-powered study companion. Get ready for effortless note-taking, instant summarization, personalized quizzes, and insightful topic explanations. Launching soon!" />
+    <meta property="og:image" content="https://eduloop.vercel.app/logo.png" /> <!-- Replace with a compelling image -->
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://eduloop.vercel.app" /> <!-- Replace with your actual URL -->
+    <meta name="twitter:title" content="EduLoop - Revolutionizing Your Study Experience (Coming Soon!)" />
+    <meta name="twitter:description" content="EduLoop is your ultimate AI-powered study companion. Get ready for effortless note-taking, instant summarization, personalized quizzes, and insightful topic explanations. Launching soon!" />
+    <meta name="twitter:image" content="https://eduloop.vercel.app/logo.png" /> <!-- Replace with a compelling image -->
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png" /> <!-- Ensure you have a favicon.png in your assets folder -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    
+    <style>
+        /* General Setup (Consistent with your theme) */
+        :root {
+            --primary-color: #3d99f5;
+            --primary-color-dark: #3588da;
+            --secondary-bg: #f7faff;
+            --card-bg: #ffffff;
+            --text-primary: #111418;
+            --text-secondary: #60758a;
+            --border-color: #e5e7eb;
+            --font-family: 'Lexend', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            padding: 1.5rem;
+        }
+
+        /* --- Background Animation --- */
+        .background-circles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-bg) 100%);
+            z-index: -1;
+        }
+
+        .background-circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            animation: animate-circles 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .background-circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .background-circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .background-circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .background-circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .background-circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .background-circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+        .background-circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .background-circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .background-circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .background-circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 11s; }
+
+        @keyframes animate-circles {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+        }
+
+        /* --- Content Container --- */
+        .coming-soon-container {
+            background-color: var(--card-bg);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 700px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            animation: scaleIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.9);
+            border: 1px solid var(--border-color);
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            transition: transform var(--transition-speed) ease;
+        }
+        .logo:hover { transform: scale(1.05); }
+        
+        /* Styles for the image logo */
+        .logo-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+        .logo-text { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: textFadeIn 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: textFadeIn 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        /* --- About Section --- */
+        .about-section {
+            background-color: var(--secondary-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            animation: textFadeIn 1s ease 0.7s forwards;
+            opacity: 0;
+        }
+        .about-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+        .about-section p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* --- Countdown Timer --- */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+            animation: textFadeIn 1s ease 0.8s forwards;
+            opacity: 0;
+        }
+        .countdown-item {
+            background-color: var(--secondary-bg);
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            min-width: 90px;
+            box-shadow: 0 4px 15px -5px rgba(0,0,0,0.08);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px -8px rgba(0,0,0,0.15);
+        }
+        .countdown-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+        .countdown-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Subscription Form */
+        .subscribe-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto 1.5rem auto;
+            animation: textFadeIn 1s ease 1s forwards;
+            opacity: 0;
+        }
+        .subscribe-form input[type="email"] {
+            padding: 0.85rem 1.25rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            color: var(--text-primary);
+            background-color: var(--secondary-bg);
+            transition: all var(--transition-speed) ease;
+        }
+        .subscribe-form input[type="email"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent);
+            background-color: var(--card-bg);
+        }
+
+        .button-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.9rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateY(0);
+            box-shadow: 0 10px 25px -8px color-mix(in srgb, var(--primary-color) 40%, transparent);
+        }
+        .button-primary:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px -10px color-mix(in srgb, var(--primary-color) 60%, transparent);
+        }
+        .button-primary:active {
+            transform: translateY(-2px) scale(0.98);
+            box-shadow: 0 5px 15px -5px color-mix(in srgb, var(--primary-color) 40%, transparent);
+        }
+
+        /* --- EduLoop Social Icons (INLINE SVGs with EXTERNAL LINKS) --- */
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            animation: textFadeIn 1.2s ease 1.2s forwards;
+            opacity: 0;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--secondary-bg);
+            color: var(--text-secondary); /* Default color for SVGs */
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        .social-link:hover {
+            color: white; /* SVGs will turn white on hover */
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .social-icon { /* Styling for the inline SVG icon */
+            width: 28px;
+            height: 28px;
+            fill: currentColor; /* Allows SVG to inherit color from parent 'a' tag */
+            transition: transform 0.3s ease;
+        }
+        .social-link:hover .social-icon {
+            transform: scale(1.1);
+        }
+
+        /* Custom hover background colors for specific social links */
+        .social-link.twitter:hover { background-color: #1DA1F2; } 
+        .social-link.instagram:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .social-link.linkedin:hover { background-color: #0A66C2; }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .coming-soon-container { padding: 1.5rem; }
+            .logo-text { font-size: 2rem; }
+            h1 { font-size: 2.2rem; }
+            .subtitle { font-size: 1rem; margin-bottom: 2rem; }
+            .about-section { padding: 1rem; margin-bottom: 2rem; }
+            .about-section h2 { font-size: 1.25rem; }
+            .about-section p { font-size: 0.9rem; }
+            .countdown { gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+            .countdown-item { min-width: 70px; padding: 0.75rem 0.5rem; }
+            .countdown-value { font-size: 1.8rem; }
+            .countdown-label { font-size: 0.75rem; }
+            .subscribe-form { gap: 0.75rem; }
+            .subscribe-form input[type="email"] { padding: 0.75rem 1rem; font-size: 0.9rem; }
+            .button-primary { padding: 0.8rem 1.2rem; font-size: 0.95rem; }
+            .social-link { width: 40px; height: 40px; }
+            .social-icon { width: 22px; height: 22px; } /* Adjust SVG size */
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Countdown Timer Logic ---
+            // Set your launch date here! (Year, Month (0-11), Day, Hour, Minute, Second)
+            const countdownDate = new Date(2025, 10, 31, 23, 59, 59).getTime(); 
+            const countdownContainer = document.getElementById('countdown');
+
+            if (countdownContainer) { 
+                const countdownElements = {
+                    days: document.getElementById('countdown-days'),
+                    hours: document.getElementById('countdown-hours'),
+                    minutes: document.getElementById('countdown-minutes'),
+                    seconds: document.getElementById('countdown-seconds')
+                };
+
+                const updateCountdown = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = countdownDate - now;
+
+                    // Calculate time units
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // Update the DOM elements, padding with leading zeros
+                    countdownElements.days.textContent = days.toString().padStart(2, '0');
+                    countdownElements.hours.textContent = hours.toString().padStart(2, '0');
+                    countdownElements.minutes.textContent = minutes.toString().padStart(2, '0');
+                    countdownElements.seconds.textContent = seconds.toString().padStart(2, '0');
+
+                    // If the countdown is finished
+                    if (distance < 0) {
+                        clearInterval(updateCountdown);
+                        countdownContainer.innerHTML = "<div class='countdown-item'><div class='countdown-value'>WE ARE LIVE!</div></div>";
+                        // document.getElementById('subscribe-form').style.display = 'none'; // Keep form for post-launch subscriptions
+                        document.querySelector('.subtitle').textContent = "EduLoop has officially launched! Start learning smarter today!";
+                    }
+                }, 1000);
+            }
+
+            // --- Subscription Form Submission (Web3Forms) ---
+            const subscribeForm = document.getElementById('subscribe-form');
+            if (subscribeForm) {
+                subscribeForm.addEventListener('submit', async (e) => {
+                    e.preventDefault(); // Prevent default form submission
+
+                    const emailInput = subscribeForm.querySelector('input[name="email"]');
+                    const email = emailInput.value;
+                    const statusMessage = document.createElement('p'); // Create a paragraph for status messages
+                    statusMessage.style.marginTop = '1rem';
+                    statusMessage.style.fontSize = '0.9rem';
+                    statusMessage.style.color = 'var(--text-secondary)';
+                    statusMessage.style.textAlign = 'center';
+                    
+                    // Remove existing status messages before adding a new one
+                    const existingStatus = subscribeForm.parentElement.querySelector('.form-status');
+                    if (existingStatus) {
+                        existingStatus.remove();
+                    }
+                    statusMessage.classList.add('form-status'); // Add a class to easily find and remove it later
+
+                    if (!email || !email.includes('@') || !email.includes('.')) {
+                        statusMessage.style.color = 'red';
+                        statusMessage.textContent = 'Please enter a valid email address.';
+                        subscribeForm.after(statusMessage);
+                        return;
+                    }
+
+                    const formData = new FormData(subscribeForm);
+                    
+                    try {
+                        const response = await fetch('https://api.web3forms.com/submit', {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            statusMessage.style.color = 'green';
+                            statusMessage.textContent = result.message || `Thank you for subscribing, ${email}! We'll notify you when we launch.`;
+                            emailInput.value = ''; // Clear the input field
+                        } else {
+                            console.error('Web3Forms error:', result);
+                            statusMessage.style.color = 'red';
+                            statusMessage.textContent = result.message || 'Something went wrong. Please try again later.';
+                        }
+                    } catch (error) {
+                        console.error('Network or submission error:', error);
+                        statusMessage.style.color = 'red';
+                        statusMessage.textContent = 'Failed to connect. Please check your internet connection and try again.';
+                    } finally {
+                        subscribeForm.after(statusMessage); // Append status message after the form
+                    }
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <ul class="background-circles">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
+
+    <div class="coming-soon-container">
+        <div class="logo">
+            <!-- IMPORTANT: Place your actual logo.png inside an 'assets' folder in the same directory as this HTML file -->
+            <img src="assets/logo.png" alt="EduLoop Logo" class="logo-image" />
+            <h1 class="logo-text">EduLoop</h1>
+        </div>
+        
+        <h1>Revolutionizing Your Study Experience, Coming Soon!</h1>
+        <p class="subtitle">
+            Get ready to study smarter, not harder. EduLoop is your ultimate AI-powered companion for effortless note-taking, instant summarization, quiz generation, and insightful topic explanations.
+        </p>
+
+        <div class="about-section">
+            <h2>About EduLoop</h2>
+            <p>
+                EduLoop is designed to streamline your learning process. Whether you're capturing notes from a lecture, needing a quick summary of a complex article, testing your knowledge with personalized quizzes, or seeking deep explanations on any subject, EduLoop leverages advanced AI to empower your academic journey. Stay ahead with smart, efficient, and personalized learning.
+            </p>
+        </div>
+
+        <div id="countdown" class="countdown">
+            <div class="countdown-item">
+                <div id="countdown-days" class="countdown-value">00</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+                <div id="countdown-hours" class="countdown-value">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+                <div id="countdown-minutes" class="countdown-value">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div id="countdown-seconds" class="countdown-value">00</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+
+        <form id="subscribe-form" class="subscribe-form" action="https://api.web3forms.com/submit" method="POST">
+            <!-- Web3Forms Access Key -->
+            <input type="hidden" name="access_key" value="8b75b01d-313a-40a8-8c68-f1597585465a">
+            <!-- This will redirect to a thank you page by Web3Forms if not specified -->
+            <!-- <input type="hidden" name="redirect" value="https://your-domain.com/thank-you.html"> -->
+            
+            <input type="email" name="email" placeholder="Enter your email" required />
+            <button type="submit" class="button-primary">Get Notified!</button>
+        </form>
+
+            <div class="social-links">
+                <a href="https://twitter.com/EduLoopOfficial" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="social-link twitter" 
+                title="EduLoop on X (Twitter)">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" 
+                        alt="X (Twitter)" class="social-icon" />
+                </a>
+
+                <a href="https://instagram.com/EduLoopOfficial" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="social-link instagram" 
+                title="EduLoop on Instagram">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" 
+                        alt="Instagram" class="social-icon" />
+                </a>
+
+                <a href="https://linkedin.com/company/EduLoopOfficial" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="social-link linkedin" 
+                title="EduLoop on LinkedIn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" 
+                        alt="LinkedIn" class="social-icon" />
+                </a>
+            </div>
+    </div>
+</body>
+</html>
